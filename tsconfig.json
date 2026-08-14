@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* What JS features to target / assume exist in the browser */
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+
+    /* Let TS understand JSX (the react-jsx runtime = no need to import React) */
+    "jsx": "react-jsx",
+
+    /* THE important one: strict turns on real type safety, incl. null checks.
+       This is what makes TS worth using — leave it on. */
+    "strict": true,
+
+    /* Vite compiles each file alone, so these keep TS in sync with that */
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+
+    /* Catch dead code — nice while learning */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": ["src", "vite.config.ts"]
+}
