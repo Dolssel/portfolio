@@ -18,6 +18,7 @@
   --accent: #38bdf8;
   --accent-soft: rgba(56, 189, 248, 0.12);
   --border: #334155;
+  --header-bg: rgba(15, 23, 42, 0.9); /* semi-transparent --bg for the sticky header */
   --max-width: 1000px;
   --radius: 10px;
 }
@@ -31,6 +32,7 @@
   --accent: #0284c7;
   --accent-soft: rgba(2, 132, 199, 0.1);
   --border: #cbd5e1;
+  --header-bg: rgba(248, 250, 252, 0.9); /* semi-transparent light --bg */
 }
 
 .theme-toggle {
@@ -69,7 +71,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--header-bg);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
 }
