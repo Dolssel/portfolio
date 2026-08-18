@@ -81,8 +81,12 @@ the React ideas and the **TS concepts** flagged along the way (per the standing
       Rules of hooks + WHY (React tracks hooks by call ORDER → top level only;
       only from React fns). Key clarity: calling a hook ≠ calling a setter
       (setters/dispatch/values are usable anywhere, incl. event handlers).
-- [ ] **15. Build & deploy** — `npm run build`, static hosting, env vars,
-      deploying the portfolio somewhere personal (not org-visible).
+- [x] **15. Build & deploy** — `npm run build` → static `dist/` (minified,
+      hashed, tree-shaken); SPA deep-link 404 gotcha → `vercel.json` rewrite +
+      `public/_redirects`; `.gitignore`; git init/commit; pushed to personal
+      GitHub (Dolssel/portfolio); deployed on Vercel (Hobby/free, auto-detects
+      Vite, auto-redeploys on push). **LIVE:** portfolio-sage-seven-61.vercel.app
+      — deep-link refresh verified working. 🎉 PHASE 1 COMPLETE.
 
 ## Phase 2 — Real projects (where fluency actually happens)
 

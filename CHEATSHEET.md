@@ -491,6 +491,29 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 
 ---
 
+## Build & deploy (Lesson 15)
+
+```bash
+npm run build   # type-check + bundle → static files in dist/ (minified, hashed)
+```
+
+- `dist/` = your whole app as plain static files. Deploying = putting `dist/` on
+  a host. No server/Node needed — that's why static hosting is free.
+- **SPA deep-link gotcha:** visiting `/projects/x` directly 404s unless the host
+  serves `index.html` for every path (then React Router takes over). Fix:
+  `vercel.json` `rewrites` → `/index.html`, and/or `public/_redirects`
+  (`/*  /index.html  200`) for Netlify.
+- **Deploy flow used:** `.gitignore` (ignore node_modules, dist) → `git init` →
+  commit → push to GitHub → import on Vercel (auto-detects Vite, free Hobby tier).
+  Every `git push` to main now auto-redeploys.
+- **Git identity gotcha:** commits carry an author name+email. For a PUBLIC
+  personal repo, set a repo-local personal identity (`git config user.email …`,
+  a GitHub `…@users.noreply.github.com` address) so no work email leaks. The push
+  CREDENTIAL (Windows Credential Manager) is separate from the commit identity —
+  both must be the personal account.
+
+---
+
 ## TypeScript mini-glossary (concepts we flagged)
 
 | Thing | Means |
@@ -528,4 +551,4 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 
 ---
 
-*Last updated: through Lesson 14. Companion to ROADMAP.md.*
+*Last updated: through Lesson 15 — Phase 1 complete. Companion to ROADMAP.md.*
