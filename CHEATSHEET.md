@@ -551,4 +551,48 @@ npm run build   # type-check + bundle → static files in dist/ (minified, hashe
 
 ---
 
-*Last updated: through Lesson 15 — Phase 1 complete. Companion to ROADMAP.md.*
+---
+
+## CSS techniques (portfolio redesign)
+
+```css
+/* Gradient text — paint the letters with a gradient */
+.name {
+  background: linear-gradient(120deg, #fb7185, #a855f7, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;   /* hide the normal fill so the gradient shows through */
+}
+```
+
+- **Layered backgrounds:** one element can stack many backgrounds, comma-separated
+  (first listed = on top). Each layer can have its own `background-size` /
+  `-position` / `-repeat` (also comma-separated, lined up by order).
+- **Grid pattern** = two crossed gradients + a cell size:
+  `linear-gradient(to right, var(--line) 1px, transparent 1px)` (vertical lines)
+  `+` the `to bottom` version (horizontal), then `background-size: 44px 44px`.
+- **Fade anything with a mask:** `mask-image: radial-gradient(#000 35%, transparent 80%)`
+  — visible where the mask is opaque, hidden where transparent. Fades a grid/texture
+  out at the edges. (Add the `-webkit-mask-image` twin for Safari.)
+- **Radial glows:** `radial-gradient(ellipse 50% 55% at 80% 22%, color, transparent 60%)`
+  — `ellipse W H` = size, `at X% Y%` = center. Stack two for depth/color.
+- **Glow visibility = CONTRAST with the background.** Light mode needs higher opacity
+  + bigger spread than dark for the *same* effect → keep separate light/dark tokens.
+- **Keyframe animation** (two parts: define + apply):
+  `@keyframes blink { 50% { opacity: 0 } }` then
+  `animation: blink 1s step-end infinite`. `step-end` = hard on/off (terminal cursor);
+  default easing = smooth pulse. Unspecified keyframes (0/100%) use the base value.
+- **`background-position` % is ALIGNMENT, not distance:** `0%` aligns left edges, `100%`
+  aligns right edges. With an OVERSIZED background, a higher % slides it LEFT (feels
+  backwards). Pixels move intuitively; percentages don't. Swap values to flip direction.
+- **Shine/shimmer sweep on hover:** an extra-wide white highlight layer parked
+  off-screen; on `:hover` animate its `background-position` across, with a `transition`.
+- **Respect motion sensitivity:** wrap looping/auto motion in
+  `@media (prefers-reduced-motion: reduce) { animation: none; }`.
+- **Theme-aware values:** define a CSS variable, override it under
+  `:root[data-theme="light"]`, and reference the var everywhere (glows, header bg,
+  grid lines) so one toggle reskins the whole page.
+
+---
+
+*Last updated: Phase 2 (portfolio redesign) — hero. Covers Lessons 1–15 + CSS techniques. Companion to ROADMAP.md.*

@@ -34,7 +34,7 @@ export default function About() {
               very portfolio - the page you're reading is the training project.
             </p>
           )}
-          <button className="btn btn-outline" onClick={() => setShowMore(!showMore)}>
+          <button className="btn btn-primary" onClick={() => setShowMore(!showMore)}>
             {showMore ? "Read less" : "Read more"}
           </button>
           <ul className="about-tech">

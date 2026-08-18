@@ -299,29 +299,46 @@ a {
 /* ===== Buttons ===== */
 .btn {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.6rem;
   border-radius: var(--radius);
+  font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 600;
-  transition: transform 0.15s, background 0.2s, color 0.2s;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.25s ease, background 0.2s, color 0.2s;
 }
 
 .btn:hover {
   transform: translateY(-2px);
 }
 
+/* Filled + glowing */
 .btn-primary {
-  background: var(--accent);
-  color: #082f49;
+  background: linear-gradient(
+    120deg,
+    rgba(251, 113, 133, 0.75),
+    rgba(168, 85, 247, 0.75),
+    rgba(56, 189, 248, 0.75)
+  );
+  color: #fff;
+  box-shadow: 0 4px 22px rgba(168, 85, 247, 0.35), 0 4px 22px rgba(56, 189, 248, 0.3);
 }
 
+.btn-primary:hover {
+  box-shadow: 0 6px 30px rgba(168, 85, 247, 0.5), 0 6px 30px rgba(56, 189, 248, 0.45);
+}
+
+/* Outlined, with a glow that grows on hover */
 .btn-outline {
-  border: 1px solid var(--accent);
+  background: transparent;
+  border-color: var(--accent);
   color: var(--accent);
 }
 
 .btn-outline:hover {
   background: var(--accent-soft);
+  box-shadow: 0 4px 22px rgba(56, 189, 248, 0.3);
 }
 
 /* Breathing room for the buttons added during the React lessons.
@@ -342,25 +359,42 @@ a {
 }
 
 .section-title {
-  font-size: 1.6rem;
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--text-bright);
   margin-bottom: 2.5rem;
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
+  align-items: baseline;
+  gap: 0.75rem;
 }
 
 .section-title.centered {
   justify-content: center;
 }
 
+/* Editorial trailing line — skip it on centered titles (e.g. Contact) */
+.section-title:not(.centered)::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  margin-left: 1rem;
+  align-self: center;
+}
+
 .section-number {
   color: var(--accent);
   font-family: monospace;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 /* ===== About ===== */
+#about {
+  background: radial-gradient(ellipse 65% 60% at 15% 80%, var(--accent-soft), transparent 70%);
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -373,25 +407,48 @@ a {
 }
 
 .about-tech {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(140px, 1fr));
-  gap: 0.4rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
-.about-tech li::before {
-  content: "▹ ";
+.about-tech li {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-bright);
+  background: var(--bg-light);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.about-tech li:hover {
+  border-color: var(--accent);
   color: var(--accent);
+  transform: translateY(-2px);
 }
 
 .photo-frame {
-  border: 2px solid var(--accent);
-  border-radius: var(--radius);
-  overflow: hidden;
   aspect-ratio: 1;
-  max-width: 280px;
+  max-width: 300px;
   margin-left: auto;
+  border-radius: 18px;
+  border: 1.5px solid transparent;
+  overflow: hidden;
+  /* Gradient BORDER via the two-background trick + a soft inner glow */
+  background:
+    radial-gradient(circle at 50% 42%, rgba(56, 189, 248, 0.16), transparent 68%) padding-box,
+    linear-gradient(var(--bg-light), var(--bg-light)) padding-box,
+    linear-gradient(135deg, #fb7185, #a855f7, #38bdf8) border-box;
+  transition: transform 0.3s ease;
+}
+
+.photo-frame:hover {
+  transform: translateY(-4px);
 }
 
 .photo-frame img {
@@ -407,10 +464,14 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
+  font-family: var(--font-display);
+  font-size: 5rem;
   font-weight: 700;
-  color: var(--accent);
-  background: var(--accent-soft);
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #fb7185, #a855f7, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* ===== Skills ===== */
