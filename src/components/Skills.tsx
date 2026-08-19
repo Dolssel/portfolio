@@ -7,8 +7,9 @@ export default function Skills() {
   return (
     <Section id="skills" number="02." title="Skills">
       <div className="skills-grid">
-        {skills.map((skill) => (
+        {skills.map((skill, index) => (
           <div className="skill-card" key={skill.id}>
+            <span className="skill-number">{String(index + 1).padStart(2, "0")}</span>
             <h3>{skill.title}</h3>
             <p>{skill.description}</p>
             <ul>
