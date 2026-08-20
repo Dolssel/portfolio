@@ -592,7 +592,24 @@ npm run build   # type-check + bundle → static files in dist/ (minified, hashe
 - **Theme-aware values:** define a CSS variable, override it under
   `:root[data-theme="light"]`, and reference the var everywhere (glows, header bg,
   grid lines) so one toggle reskins the whole page.
+- **Outlined ("ghost") text:** `color: transparent` + `-webkit-text-stroke: 1.5px COLOR`
+  = hollow letters. Fill on hover by setting `color` and making the stroke transparent.
+  (Used for the big skill-card numbers.)
+- **`color-mix()`** — two everyday uses:
+  - *Alpha from a variable:* `color-mix(in srgb, var(--c) 25%, transparent)` = that
+    color at 25% opacity. (You can't put a hex var inside `rgba()`, so this is how.)
+  - *Blend two colors:* `color-mix(in srgb, var(--c) 22%, var(--border))` = 22% accent
+    mixed into the border.
+- **Per-element CSS variable:** set a var on each item
+  (`.card:nth-child(1) { --card-accent: var(--brand-rose) }`) and reference it in the
+  SHARED rules (`var(--card-accent)`). One set of rules, a different color per item.
+  Vars inherit to children (so the number inside reads the card's `--card-accent`).
+- **DRY color tokens:** hoist repeated brand colors into `:root` vars
+  (`--brand-rose/purple/blue`) and reference them everywhere — change one, update the
+  whole site.
+- **`String(n).padStart(2, "0")`** (JS, not CSS) — pads a string to a length →
+  `"1"` becomes `"01"` for tidy two-digit labels. `padEnd` is the other-side twin.
 
 ---
 
-*Last updated: Phase 2 (portfolio redesign) — hero. Covers Lessons 1–15 + CSS techniques. Companion to ROADMAP.md.*
+*Last updated: Phase 2 (portfolio redesign) — hero + About + Skills. Covers Lessons 1–15 + CSS techniques. Companion to ROADMAP.md.*

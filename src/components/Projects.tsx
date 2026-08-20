@@ -14,12 +14,19 @@ export default function Projects() {
 
   // DERIVED value -- computed from state, never stored separately.
   const total = Object.values(likes).reduce((sum, n) => sum + n, 0);
+  // Featured projects first, so the big bento cell lands top-left.
+  const ordered = [...projects].sort(
+    (a, b) => Number(b.featured ?? false) - Number(a.featured ?? false)
+  );
 
   return (
     <Section id="projects" number="03." title="Projects">
-      <p className="contact-text">❤️ {total} total likes</p>
+      <p className="projects-total">
+        ♥ <span className="projects-total-count">{total}</span> total{" "}
+        {total === 1 ? "like" : "likes"}
+      </p>
       <div className="projects-grid">
-        {projects.map((project) => (
+        {ordered.map((project) => (
           <ProjectCard 
             key={project.id}
             project={project}

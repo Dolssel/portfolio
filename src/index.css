@@ -353,11 +353,6 @@ a {
   margin-top: 1.5rem;
 }
 
-.project-card .btn {
-  margin-top: 1.25rem;
-  align-self: flex-start; /* don't stretch full-width in the flex column */
-}
-
 /* ===== Sections ===== */
 .section {
   padding: 5rem 1.5rem;
@@ -549,34 +544,120 @@ a {
 }
 
 /* ===== Projects ===== */
+#projects {
+  position: relative;
+  background:
+    /* TOP — concentrated center bloom (the "eclipse" glow) */
+    radial-gradient(
+      55% 42% at 50% -6%,
+      color-mix(in srgb, var(--brand-blue) 40%, transparent),
+      transparent 70%
+    ),
+    /* TOP — thin arc line */
+    radial-gradient(
+      140% 100% at 50% -60%,
+      transparent 60%,
+      color-mix(in srgb, var(--brand-blue) 38%, transparent) 66%,
+      transparent 74%
+    ),
+    /* BOTTOM — concentrated center bloom */
+    radial-gradient(
+      55% 42% at 50% 106%,
+      color-mix(in srgb, var(--brand-rose) 38%, transparent),
+      transparent 70%
+    ),
+    /* BOTTOM — thin arc line */
+    radial-gradient(
+      140% 100% at 50% 160%,
+      transparent 60%,
+      color-mix(in srgb, var(--brand-rose) 35%, transparent) 66%,
+      transparent 74%
+    );
+}
+
+/* ===== Projects (bento grid) ===== */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* The featured project takes a big 2×2 cell (it's sorted first) */
+.project-card.featured {
+  grid-column: 1 / -1;
 }
 
 .project-card {
   background: var(--bg-light);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 14px;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, border-color 0.2s;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
   border-color: var(--accent);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.project-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+/* Top row: icon left, Featured badge right */
+.project-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .project-icon {
   font-size: 2rem;
 }
 
+.project-featured {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--brand-rose);
+  border: 1px solid color-mix(in srgb, var(--brand-rose) 45%, transparent);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+
 .project-name {
+  font-family: var(--font-display);
   color: var(--text-bright);
   margin-top: 1rem;
+  font-size: 1.35rem;
+}
+
+/* The big featured card gets larger text */
+.project-card.featured .project-name {
+  font-size: 2rem;
+}
+.project-card.featured .project-desc {
+  font-size: 1.05rem;
+}
+
+/* Stack to one column on small screens */
+@media (max-width: 720px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-card.featured {
+    grid-column: auto;
+    grid-row: auto;
+  }
 }
 
 .project-desc {
@@ -593,6 +674,23 @@ a {
   gap: 0.5rem;
 }
 
+.projects-total {
+  display: inline-block;
+  margin-bottom: 1.75rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--brand-rose) 30%, transparent);
+  background: color-mix(in srgb, var(--brand-rose) 8%, transparent);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.projects-total-count {
+  color: var(--brand-rose);
+  font-weight: 700;
+}
+
 .project-tags li {
   font-family: monospace;
   font-size: 0.8rem;
@@ -600,6 +698,43 @@ a {
   background: var(--accent-soft);
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
+}
+
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.like-button:hover {
+  border-color: var(--brand-rose);
+  color: var(--brand-rose);
+}
+
+/* Active state once it has likes */
+.like-button.liked {
+  border-color: color-mix(in srgb, var(--brand-rose) 50%, transparent);
+  color: var(--brand-rose);
+  background: color-mix(in srgb, var(--brand-rose) 12%, transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--brand-rose) 25%, transparent);
+}
+
+/* The heart pops when you press it */
+.like-heart {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.like-button:active .like-heart {
+  transform: scale(1.4);
 }
 
 /* ===== Contact ===== */
