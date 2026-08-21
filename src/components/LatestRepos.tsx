@@ -48,11 +48,16 @@ export default function LatestRepos() {
         <ul className="repo-list">
           {repos.map((repo) => (
             <li key={repo.id} className="repo-item">
-              <a href={repo.html_url} target="_blank" rel="noreferrer">
-                {repo.name}
+              <a
+                className="repo-name"
+                href={repo.html_url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {repo.name} ↗
               </a>
-              {repo.language && <span> · {repo.language}</span>}
               {repo.description && <p className="repo-desc">{repo.description}</p>}
+              {repo.language && <span className="repo-lang">{repo.language}</span>}
             </li>
           ))}
         </ul>

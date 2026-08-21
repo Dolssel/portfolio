@@ -5,7 +5,32 @@ export default function Footer() {
 
   return (
     <footer className="site-footer">
-      <p>© {year} Dalison Rakotoarivony — Built with React + TypeScript.</p>
+      <div className="footer-inner container">
+        <div className="footer-brand">
+          <span className="footer-logo">
+            Dalison<span>.</span>
+          </span>
+          <p className="footer-tagline">Front-end developer, always learning.</p>
+        </div>
+
+        <ul className="footer-links">
+          <li>
+            <a href="https://github.com/Dolssel" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="mailto:hello@example.com">Email</a>
+          </li>
+          <li>
+            <a href="#home">Back to top ↑</a>
+          </li>
+        </ul>
+      </div>
+
+      <p className="footer-copy">
+        © {year} Dalison Rakotoarivony — Built with React + TypeScript.
+      </p>
     </footer>
   );
 }
