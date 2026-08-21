@@ -13,10 +13,12 @@ export default function BackToTop() {
     if (!visible) return null; // a component can render nothing - this is valid
 
     return (
-        <button
-          className="btn btn--primary back-to-top"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth"})}>
-            ↑ Top
-        </button>
+    <button
+      className="back-to-top"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Back to top"
+    >
+      ↑
+    </button>
     );
 }
