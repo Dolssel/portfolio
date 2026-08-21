@@ -609,7 +609,22 @@ npm run build   # type-check + bundle → static files in dist/ (minified, hashe
   whole site.
 - **`String(n).padStart(2, "0")`** (JS, not CSS) — pads a string to a length →
   `"1"` becomes `"01"` for tidy two-digit labels. `padEnd` is the other-side twin.
+- **Animated underline / reveal:** a `::after` bar with `transform: scaleX(0)` →
+  `scaleX(1)` on hover, plus `transform-origin: left` so it grows from the left.
+  Animate `transform` (GPU-friendly, no layout reflow), NOT `width`.
+- **Gradient border — straight edges:** `border-top: 2px solid transparent;`
+  `border-image: linear-gradient(...) 1;` (the `1` = border-image-slice). Simple,
+  but IGNORES `border-radius`. Need rounded corners? use the two-background
+  `padding-box`/`border-box` trick instead. (Two tools; pick by rounded-or-not.)
+- **`nth-child` step patterns** — cycle a set of values across a list of any length:
+  `:nth-child(3n+1)` = 1,4,7…; `:nth-child(3n+2)` = 2,5,8…; `:nth-child(3n)` = 3,6,9…
+  (used to rotate the 3 brand colors across the repo cards).
+- **Focus ring:** `box-shadow: 0 0 0 3px COLOR` (zero blur, 3px spread = a ring
+  hugging the element). If you set `outline: none`, ALWAYS give a visible
+  replacement like this — else keyboard users lose track of focus (a11y).
+- **`filter: drop-shadow(...)`** glows an element's ACTUAL shape (emoji, icon,
+  transparent PNG) — unlike `box-shadow`, which glows the rectangular box.
 
 ---
 
-*Last updated: Phase 2 (portfolio redesign) — hero + About + Skills. Covers Lessons 1–15 + CSS techniques. Companion to ROADMAP.md.*
+*Last updated: Phase 2 (portfolio redesign) — hero, About, Skills, Projects + polish pass. Covers Lessons 1–15 + CSS techniques. Companion to ROADMAP.md.*
